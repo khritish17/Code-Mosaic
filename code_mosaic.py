@@ -3,7 +3,7 @@ from pygments.lexers import get_lexer_by_name
 from pygments.token import Token, string_to_tokentype
 import os
 import color_generator as cg
-import image_maker as im
+import image_generator as ig
 
 class CodeMosaic:
     def __init__(self, location="") -> None:
@@ -19,11 +19,19 @@ class CodeMosaic:
 
         # # Tokenize the code using the identified lexer
         self.tokens = self.get_token()
-        
+        print(self.tokens)
         # Assign unique colors to each token
         self.token_color = self.color_codes()
-        im.build_frames(height=500, width=1000, tokens=self.tokens, token_color=self.token_color, output_path="perfect.png")
 
+        line_color = []
+        for line in self.tokens:
+            arr = []
+            for token, val in line:
+                arr.append( (val, self.token_color[token]) )
+            line_color.append(arr)
+        
+        # im.build_frames(tokens=self.tokens, token_color=self.token_color, output_path="perfect.png")
+        ig.build_frames(height = 500, width = 1000, line_color=line_color, output_path= "Code_Mosaic_Output.png")
     def color_codes(self):
         # Assign unique colors to each token
         token_color = {}
@@ -71,6 +79,6 @@ class CodeMosaic:
         file.close()
 
 # Example usage
-CM = CodeMosaic(location=r"D:\Codes\Projects\Code Mosaic\test.c")
+CM = CodeMosaic(location=r"D:\Codes\Projects\Code Mosaic\test.py")
 
 

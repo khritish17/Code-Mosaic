@@ -1,46 +1,24 @@
-from PIL import Image, ImageDraw, ImageFilter, ImageFont
+def calculate_hypotenuse(side1, side2):
+    # This function calculates the hypotenuse of a right-angled triangle
+    # using the Pythagorean theorem: c = sqrt(a^2 + b^2)
 
-def build_frame(height, width, lines, output_path = "Untitled Image.png"):
+    # Calculate the square of side1
+    side1_squared = side1 ** 2
 
-    # Create a new image with the specified background color and dimensions
-    background_color = (93, 94, 184) # purple color
-    image = Image.new("RGB", (width, height), background_color)
-    
-    # Create a drawing object
-    draw = ImageDraw.Draw(image)
-    
-    font_size = 20
-    font = ImageFont.truetype("JetBrainsMono.ttf", font_size)
-    
-    # create the terminal window
-    spacing = 15
-    letter = list(lines[0])[0]
-    letter_height = draw.textlength(letter, font=font)
-    # r = len(lines) * font_size
-    r = (letter_height + spacing )* len(lines)
-    x = int(0.06*width)
-    y = x//2
-    k = (height - r - 2*y) // 2
-    box_color = (41, 42, 43)
-    corner_radius = 15
-    draw.rounded_rectangle([(x, k), (width - x, height + spacing - k)], fill=box_color, radius=corner_radius)
+    # Calculate the square of side2
+    side2_squared = side2 ** 2
 
-    
-    # create the three circles
-    radius = y//3
-    z = 3.5 * radius
-    draw.ellipse([(x + y, k + y), (x + y + 2*radius, k + y + 2*radius)], fill=((255, 95, 86)), outline=None)
-    draw.ellipse([(x + y + z, k + y), (x + y + 2*radius + z, k + y + 2*radius)], fill=((255, 189, 46)), outline=None)
-    draw.ellipse([(x + y + 2*z, k + y), (x + y + 2*radius + 2*z, k + y + 2*radius)], fill=((39, 201, 63)), outline=None)
-    
-    # writing area starts from [x + y, k + y + 2*radius]
-    # write the text
-    y_pos = spacing
-    for line in lines:
-        draw.text(xy= [x + y, k + y + 2*radius + y_pos], text=line, font=font)
-        y_pos += letter_height + spacing
+    # Sum the squares of side1 and side2
+    sum_of_squares = side1_squared + side2_squared
 
-    # saving the image
-    image.save(output_path)
-message = ["draw.ellipse([(x + y + 2*z, k + y), (x + y + 2*radius + 2*z, k + y + 2*radius)], fill=((39, 201, 63)), outline=None)", "  id: 5678,", "   username: 'khritish17'", "  name: 'Khritish'", "};"]
-build_frame(height=500, width=1000, lines=message, output_path = "code_mosaic.png")
+    # Calculate the square root of the sum_of_squares
+    hypotenuse = sum_of_squares ** 0.5
+
+    return hypotenuse
+
+
+# Test the function with a right-angled triangle with sides 3 and 4
+triangle_hypotenuse = calculate_hypotenuse(3, 4)
+
+# Print the result
+print(f"The hypotenuse of the triangle is: {triangle_hypotenuse}")
