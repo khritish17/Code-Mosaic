@@ -4,7 +4,7 @@ def build_frames(height, width, line_color, output_path = "Untitled_image.png"):
     file_name = output_path.split(".")[0]
     
     def frames(height, width, line_color, count, font_size = 20, spacing = 15):
-        print(count)
+        # line_color is an array: [(word, color)]
         # Create a new image with the specified background color and dimensions
         background_color = (93, 94, 184) # purple color
         image = Image.new("RGB", (width, height), background_color)
@@ -70,7 +70,6 @@ def build_frames(height, width, line_color, output_path = "Untitled_image.png"):
         if status == None:
             break
         else:
-            print("Hi")
             count += 1
             status = frames(height=height, width=width, line_color = line_color[status:], count= count)
             

@@ -15,11 +15,11 @@ class CodeMosaic:
 
         # Get the lexer alias for the identified programming language
         alias = self.code_ext_resolver()
-        self.lexer = get_lexer_by_name(alias, stripall=True)
+        self.lexer = get_lexer_by_name(alias)
 
         # # Tokenize the code using the identified lexer
         self.tokens = self.get_token()
-        print(self.tokens)
+        # print(self.tokens)
         # Assign unique colors to each token
         self.token_color = self.color_codes()
 
@@ -31,7 +31,7 @@ class CodeMosaic:
             line_color.append(arr)
         
         # im.build_frames(tokens=self.tokens, token_color=self.token_color, output_path="perfect.png")
-        ig.build_frames(height = 500, width = 1000, line_color=line_color, output_path= "Code_Mosaic_Output.png")
+        ig.build_frames(height = 500, width = 1100, line_color=line_color, output_path= "Code_Mosaic_Output.png")
     def color_codes(self):
         # Assign unique colors to each token
         token_color = {}
@@ -56,11 +56,12 @@ class CodeMosaic:
         tokens = []
         for line in lines:
             token = list(lex(line, self.lexer))
-            # trying to eliminate the 
-            if len(token) != 1:
-                tokens.append(token[:-1])
-            # else:
-            #     tokens.append([])
+            if token[-1][1] == "\n":
+                tokens.append(token[:-1] + [(token[-1][0]," ")])
+            elif token[-1][1][-1:] == "\n":
+                tokens.append(token[:-1] + [(token[-1][0],token[-1][1][:-1])])
+            else:
+                tokens.append(token)
         return tokens
 
     def detect_language(self):
@@ -79,6 +80,4 @@ class CodeMosaic:
         file.close()
 
 # Example usage
-CM = CodeMosaic(location=r"D:\Codes\Projects\Code Mosaic\test.py")
-
-
+CM = CodeMosaic(location=r"D:\Codes\Projects\Code Mosaic\test.c")
