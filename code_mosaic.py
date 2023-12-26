@@ -19,7 +19,6 @@ class CodeMosaic:
 
         # # Tokenize the code using the identified lexer
         self.tokens = self.get_token()
-        # print(self.tokens)
         # Assign unique colors to each token
         self.token_color = self.color_codes()
 
@@ -31,22 +30,14 @@ class CodeMosaic:
             line_color.append(arr)
         
         # im.build_frames(tokens=self.tokens, token_color=self.token_color, output_path="perfect.png")
-        ig.build_frames(height = 500, width = 1100, line_color=line_color, output_path= "Code_Mosaic_Output.png")
+        ig.build_frames(height = 500, width = 1100, line_color=line_color, location = self.location, output_path= "Code_Mosaic_Output.png")
+    
     def color_codes(self):
         # Assign unique colors to each token
         token_color = {}
-        visited_color = []
         for tokens in self.tokens:
             for token, _ in tokens:
-                try:
-                    _ = token_color[token]
-                except KeyError:
-                    # Generate a vibrant color and ensure it is unique
-                    color = cg.generate_vibrant_color()
-                    while color in visited_color:
-                        color = cg.generate_vibrant_color()
-                    token_color[token] = color
-                    visited_color.append(color)
+                token_color[token] =cg.vibrant_color(token)
         return token_color
 
     def get_token(self):
@@ -80,4 +71,4 @@ class CodeMosaic:
         file.close()
 
 # Example usage
-CM = CodeMosaic(location=r"D:\Codes\Projects\Code Mosaic\test.c")
+CM = CodeMosaic(location=r"D:\Codes\Projects\Code Mosaic\test\test.py")
