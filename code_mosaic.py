@@ -6,7 +6,7 @@ import color_generator as cg
 import image_generator as ig
 
 class CodeMosaic:
-    def __init__(self, location="") -> None:
+    def __init__(self, height = 500, width = 1000, font_size = 20, spacing = 15, location="") -> None:
         # Store the absolute path of the code file
         self.location = os.path.abspath(location)
 
@@ -19,6 +19,7 @@ class CodeMosaic:
 
         # # Tokenize the code using the identified lexer
         self.tokens = self.get_token()
+        # print(self.tokens)
         # Assign unique colors to each token
         self.token_color = self.color_codes()
 
@@ -30,7 +31,7 @@ class CodeMosaic:
             line_color.append(arr)
         
         # im.build_frames(tokens=self.tokens, token_color=self.token_color, output_path="perfect.png")
-        ig.build_frames(height = 500, width = 1100, line_color=line_color, location = self.location, output_path= "Code_Mosaic_Output.png")
+        ig.build_frames(height = height, width = width, line_color=line_color, location = self.location, output_path= "Code_Mosaic_Output.png", font_size=font_size, spacing=spacing)
     
     def color_codes(self):
         # Assign unique colors to each token
@@ -71,4 +72,4 @@ class CodeMosaic:
         file.close()
 
 # Example usage
-CM = CodeMosaic(location=r"D:\Codes\Projects\Code Mosaic\test\test.py")
+# CM = CodeMosaic(location=r"D:\Codes\Projects\Code Mosaic\test\test.py")

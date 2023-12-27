@@ -58,10 +58,10 @@ def build_frames(height, width, line_color, location ,output_path = "Untitled_im
                 y_pos += spacing + draw.textlength(word[0], font=font)
             else:
                 # saving the image
-                image.save(f"{loc}\{file_name}_part{count}.png")
+                image.save(f"{loc}\{file_name}_{count}.png")
                 return line_color[i:]
         # saving the image
-        image.save(f"{loc}\{file_name}_part{count}.png")
+        image.save(f"{loc}\{file_name}_{count}.png")
         return None
             
 
