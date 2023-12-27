@@ -13,12 +13,12 @@ class BackgroundApp(App):
         # Create a main layout using StackLayout
         main_layout = BoxLayout(orientation = "vertical", padding = 0, spacing = 0)
         #
-        heading_label = Label(text='CODE MOSAIC', font_size=20, color=(1, 1, 1, 1))
+        heading_label = Label(text='CODE MOSAIC', font_size=35, bold = True, color=(1, 1, 1, 1), font_name = 'JetBrainsMono.ttf')
         main_layout.add_widget(heading_label)
         # nav bar layout
         nav_bar = BoxLayout(orientation = "horizontal", padding = 10, spacing = 10)
         path_input = TextInput(hint_text='Full path to file e.g. D:\Codes\Projects\Code Mosaic\\test.py', multiline=False)
-        browse_button = Button(text="Browse",  size=(100, 50))
+        browse_button = Button(text="Browse")
         nav_bar.add_widget(path_input)
         nav_bar.add_widget(browse_button)
         # ----

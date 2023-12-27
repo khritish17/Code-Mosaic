@@ -6,7 +6,7 @@ import color_generator as cg
 import image_generator as ig
 
 class CodeMosaic:
-    def __init__(self, height = 500, width = 1000, font_size = 20, spacing = 15, location="") -> None:
+    def __init__(self, height=500, width=1000, font_size=20, spacing=15, location="") -> None:
         # Store the absolute path of the code file
         self.location = os.path.abspath(location)
 
@@ -17,28 +17,30 @@ class CodeMosaic:
         alias = self.code_ext_resolver()
         self.lexer = get_lexer_by_name(alias)
 
-        # # Tokenize the code using the identified lexer
+        # Tokenize the code using the identified lexer
         self.tokens = self.get_token()
-        # print(self.tokens)
+
         # Assign unique colors to each token
         self.token_color = self.color_codes()
 
+        # Prepare line_color for image generation
         line_color = []
         for line in self.tokens:
             arr = []
             for token, val in line:
-                arr.append( (val, self.token_color[token]) )
+                arr.append((val, self.token_color[token]))
             line_color.append(arr)
-        
-        # im.build_frames(tokens=self.tokens, token_color=self.token_color, output_path="perfect.png")
-        ig.build_frames(height = height, width = width, line_color=line_color, location = self.location, output_path= "Code_Mosaic_Output.png", font_size=font_size, spacing=spacing)
-    
+
+        # Generate the image frames
+        ig.build_frames(height=height, width=width, line_color=line_color, location=self.location,
+                        output_path="Code_Mosaic_Output.png", font_size=font_size, spacing=spacing)
+
     def color_codes(self):
         # Assign unique colors to each token
         token_color = {}
         for tokens in self.tokens:
             for token, _ in tokens:
-                token_color[token] =cg.vibrant_color(token)
+                token_color[token] = cg.vibrant_color(token)
         return token_color
 
     def get_token(self):
@@ -49,9 +51,9 @@ class CodeMosaic:
         for line in lines:
             token = list(lex(line, self.lexer))
             if token[-1][1] == "\n":
-                tokens.append(token[:-1] + [(token[-1][0]," ")])
+                tokens.append(token[:-1] + [(token[-1][0], " ")])
             elif token[-1][1][-1:] == "\n":
-                tokens.append(token[:-1] + [(token[-1][0],token[-1][1][:-1])])
+                tokens.append(token[:-1] + [(token[-1][0], token[-1][1][:-1])])
             else:
                 tokens.append(token)
         return tokens
