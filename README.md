@@ -1,6 +1,6 @@
 # Code Mosaic Documentation
 ### Overview
-The Code Mosaic module is purpose-built to generate visual representations of source code files, presented as images for convenient sharing on social media platforms. It utilizes the Pygments library for syntax highlighting and color generation, producing vibrant and visually appealing mosaic images that reflect the structure and patterns of the source code.
+The Code Mosaic module is purpose-built to generate visual representations of source code files, presented as images for convenient sharing on social media platforms. It utilizes the Pygments library for syntax highlighting and color generation, producing vibrant and visually appealing images that reflect the source code.
 
 ## File: code_mosaic.py | Class: CodeMosaic
 ### Constructor
